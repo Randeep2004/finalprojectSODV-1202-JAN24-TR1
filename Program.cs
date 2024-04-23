@@ -28,3 +28,28 @@ public class ConnectFour
 
 
     }
+    public void PrintBoard()
+    {
+        for (int i = 0; i < ROWS; i++)
+        {
+            for (int j = 0; j < COLUMNS; j++)
+            {
+                Console.Write(board[i, j] + " ");
+            }
+            Console.WriteLine();
+        }
+    }
+
+    public bool DropPiece(int column)
+    {
+        for (int i = ROWS - 1; i >= 0; i--)
+        {
+            if (board[i, column] == 0)
+            {
+                board[i, column] = currentPlayer;
+                return true;
+            }
+        }
+        return false; // Column is full
+    }
+}
