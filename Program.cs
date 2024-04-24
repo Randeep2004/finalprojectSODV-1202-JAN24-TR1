@@ -52,7 +52,7 @@ public class ConnectFour
 
     public bool CheckWin()
     {
-        // Check horizontally
+        // Check horizontally  yr
         for (int i = 0; i < ROWS; i++)
         {
             for (int j = 0; j < COLUMNS - 3; j++)
@@ -115,11 +115,11 @@ public class ConnectFour
             {
                 if (board[i, j] == 0)
                 {
-                    return false; // Board is not full
+                    return false; //The Board is not full
                 }
             }
         }
-        return true; // Board is full
+        return true; //The Board is full
     }
 
     public void SwitchPlayer()
