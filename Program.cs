@@ -1,4 +1,4 @@
-﻿   using System;
+﻿using System;
 
 public class ConnectFour
 {
@@ -6,8 +6,6 @@ public class ConnectFour
     private const int COLUMNS = 7;
     private int[,] board;
     private int currentPlayer;
-
-
 
     public ConnectFour()
     {
@@ -25,9 +23,8 @@ public class ConnectFour
                 board[i, j] = 0;
             }
         }
-
-
     }
+
     public void PrintBoard()
     {
         for (int i = 0; i < ROWS; i++)
@@ -52,6 +49,7 @@ public class ConnectFour
         }
         return false; // Column is full
     }
+
     public bool CheckWin()
     {
         // Check horizontally
@@ -107,5 +105,30 @@ public class ConnectFour
         }
 
         return false;
+    }
+
+    public bool IsDraw()
+    {
+        for (int i = 0; i < ROWS; i++)
+        {
+            for (int j = 0; j < COLUMNS; j++)
+            {
+                if (board[i, j] == 0)
+                {
+                    return false; // Board is not full
+                }
+            }
+        }
+        return true; // Board is full
+    }
+
+    public void SwitchPlayer()
+    {
+        currentPlayer = currentPlayer == 1 ? 2 : 1;
+    }
+
+    public int GetCurrentPlayer()
+    {
+        return currentPlayer;
     }
 }
