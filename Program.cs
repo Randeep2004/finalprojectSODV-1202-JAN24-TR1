@@ -195,6 +195,7 @@ class Program
                 } while (!int.TryParse(Console.ReadLine(), out column) || column < 1 || column > 7);
                 column--; // Adjust for 0-based indexing
             }
+           
             if (game.DropPiece(column))
             {
                 if (game.CheckWin())
@@ -218,7 +219,7 @@ class Program
             }
             else
             {
-                Console.WriteLine("Column is full. Please choose another column.");
+                Console.WriteLine("This Column is full. Please enter another column.");
                 Console.ReadLine();
             }
         }
