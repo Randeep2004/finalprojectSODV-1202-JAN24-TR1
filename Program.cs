@@ -1,16 +1,20 @@
-﻿using System;
+using System;
 
 public class ConnectFour
 {
     private const int ROWS = 6;
     private const int COLUMNS = 7;
-    private int[,] board;
-    private int currentPlayer;
+    private char[,] board;
+    private char currentPlayer;
+    private bool isSinglePlayer;
+    private Random random;
 
-    public ConnectFour()
+    public ConnectFour(bool singlePlayer)
     {
-        board = new int[ROWS, COLUMNS];
-        currentPlayer = 1;
+        board = new char[ROWS, COLUMNS];
+        currentPlayer = 'X';
+        isSinglePlayer = singlePlayer;
+        random = new Random();
         InitializeBoard();
     }
 
