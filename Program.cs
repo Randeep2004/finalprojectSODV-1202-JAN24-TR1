@@ -1,12 +1,3 @@
-
-//SODV 1202
-//RANDEEP SINGH DEOL
-//PRASHANT PANDEY
-//FINAL PROJECT
-//BOW VALLEY COLLEGE
-//MAHBUB MURSHED
-//CONNECT 4
-
 using System;
 
 public class ConnectFour
@@ -173,13 +164,13 @@ class Program
             do
             {
                 Console.Write("Enter '1' for single player or '2' for two players: ");
-                if (!int.TryParse(Console.ReadLine(), out int choice) || (choice != 1 && choice != 2))
+                if (!int.TryParse(Console.ReadLine(), out int playerChoice) || (playerChoice != 1 && playerChoice != 2))
                 {
                     Console.WriteLine("Invalid input! Please enter '1' or '2'.");
                     continue;
                 }
 
-                singlePlayer = choice == 1;
+                singlePlayer = playerChoice == 1;
                 break;
             } while (true);
 
@@ -236,9 +227,8 @@ class Program
             }
 
             Console.Write("Do you want to play again? (yes/no): ");
-            string choice = Console.ReadLine().ToLower();
-            replay = choice == "yes";
+            string playAgainChoice = Console.ReadLine().ToLower();
+            replay = playAgainChoice == "yes";
         }
     }
 }
-
