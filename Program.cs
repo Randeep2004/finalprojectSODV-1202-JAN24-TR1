@@ -132,3 +132,51 @@ public class ConnectFour
         return currentPlayer;
     }
 }
+class Program
+{
+    static void Main(string[] args)
+    {
+        ConnectFour game = new ConnectFour();
+        bool gameOver = false;
+
+        while (!gameOver)
+        {
+            Console.Clear();
+            game.PrintBoard();
+            Console.WriteLine($"Player {game.GetCurrentPlayer()}'s turn.");
+
+            int column;
+            do
+            {
+                Console.Write("Enter column (0-6): ");
+            } while (!int.TryParse(Console.ReadLine(), out column) || column < 0 || column > 6);
+
+            if (game.DropPiece(column))
+            {
+                if (game.CheckWin())
+                {
+                    Console.Clear();
+                    game.PrintBoard();
+                    Console.WriteLine($"Player {game.GetCurrentPlayer()} wins!");
+                    gameOver = true;
+                }
+                else if (game.IsDraw())
+                {
+                    Console.Clear();
+                    game.PrintBoard();
+                    Console.WriteLine("It's a draw!");
+                    gameOver = true;
+                }
+                else
+                {
+                    game.SwitchPlayer();
+                }
+            }
+            else
+            {
+                Console.WriteLine("Column is full. Please choose another column.");
+                Console.ReadLine();
+            }
+        }
+    }
+}
