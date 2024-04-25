@@ -161,7 +161,18 @@ class Program
 {
     static void Main(string[] args)
     {
-        ConnectFour game = new ConnectFour();
+        bool singlePlayer;
+        do
+        {
+            Console.Write("Enter '1' for single player or '2' for two players: ");
+            singlePlayer = Console.ReadLine() == "1" ? true : false;
+            if (singlePlayer || !singlePlayer)
+                break;
+            else
+                Console.WriteLine("Invalid input! Please enter '1' or '2'.");
+        } while (true);
+
+        ConnectFour game = new ConnectFour(singlePlayer);
         bool gameOver = false;
 
         while (!gameOver)
@@ -171,11 +182,19 @@ class Program
             Console.WriteLine($"Player {game.GetCurrentPlayer()}'s turn.");
 
             int column;
-            do
+            if (singlePlayer && game.GetCurrentPlayer() == 'O')
             {
-                Console.Write("Enter column (0-6): ");
-            } while (!int.TryParse(Console.ReadLine(), out column) || column < 0 || column > 6);
-
+                column = game.GetColumnForAI();
+                Console.WriteLine($"Computer chose column {column + 1}");
+            }
+            else
+            {
+                do
+                {
+                    Console.Write("Enter column (1-7): ");
+                } while (!int.TryParse(Console.ReadLine(), out column) || column < 1 || column > 7);
+                column--; // Adjust for 0-based indexing
+            }
             if (game.DropPiece(column))
             {
                 if (game.CheckWin())
