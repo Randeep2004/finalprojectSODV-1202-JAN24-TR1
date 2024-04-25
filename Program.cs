@@ -19,40 +19,43 @@ public class ConnectFour
     }
 
     private void InitializeBoard()
+{
+    for (int i = 0; i < ROWS; i++)
     {
-        for (int i = 0; i < ROWS; i++)
+        for (int j = 0; j < COLUMNS; j++)
         {
-            for (int j = 0; j < COLUMNS; j++)
-            {
-                board[i, j] = 0;
-            }
+            board[i, j] = '#'; // Initialize with '#' symbol
         }
     }
+}
 
-    public void PrintBoard()
+public void PrintBoard()
+{
+    Console.WriteLine("  1 2 3 4 5 6 7");
+    for (int i = 0; i < ROWS; i++)
     {
-        for (int i = 0; i < ROWS; i++)
+        Console.Write("| ");
+        for (int j = 0; j < COLUMNS; j++)
         {
-            for (int j = 0; j < COLUMNS; j++)
-            {
-                Console.Write(board[i, j] + " ");
-            }
-            Console.WriteLine();
+            Console.Write(board[i, j] + " ");
         }
+        Console.WriteLine("|");
     }
+    Console.WriteLine("---------------");
+}
 
-    public bool DropPiece(int column)
+public bool DropPiece(int column)
+{
+    for (int i = ROWS - 1; i >= 0; i--)
     {
-        for (int i = ROWS - 1; i >= 0; i--)
+        if (board[i, column] == '#')
         {
-            if (board[i, column] == 0)
-            {
-                board[i, column] = currentPlayer;
-                return true;
-            }
+            board[i, column] = currentPlayer;
+            return true;
         }
-        return false; // Column is full
     }
+    return false; // Column is full
+}
 
     public bool CheckWin()
     {
