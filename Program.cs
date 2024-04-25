@@ -1,3 +1,13 @@
+//SODV 1202
+//RANDEEP SINGH DEOL
+//PRASHANT PANDEY
+//FINAL PROJECT
+//BOW VALLEY COLLEGE
+//MAHBUB MURSHED
+//CONNECT 4
+
+
+
 using System;
 
 public class ConnectFour
@@ -57,63 +67,64 @@ public bool DropPiece(int column)
     return false; // Column is full
 }
 
-    public bool CheckWin()
+  //for checking win conditions
+public bool CheckWin()
+{
+    // Check horizontally
+    for (int i = 0; i < ROWS; i++)
     {
-        // Check horizontally  yr
-        for (int i = 0; i < ROWS; i++)
+        for (int j = 0; j < COLUMNS - 3; j++)
         {
-            for (int j = 0; j < COLUMNS - 3; j++)
+            if (board[i, j] != '#' && board[i, j] == board[i, j + 1] &&
+                board[i, j] == board[i, j + 2] && board[i, j] == board[i, j + 3])
             {
-                if (board[i, j] == currentPlayer && board[i, j + 1] == currentPlayer &&
-                    board[i, j + 2] == currentPlayer && board[i, j + 3] == currentPlayer)
-                {
-                    return true;
-                }
+                return true;
             }
         }
-
-        // Check vertically
-        for (int i = 0; i < ROWS - 3; i++)
-        {
-            for (int j = 0; j < COLUMNS; j++)
-            {
-                if (board[i, j] == currentPlayer && board[i + 1, j] == currentPlayer &&
-                    board[i + 2, j] == currentPlayer && board[i + 3, j] == currentPlayer)
-                {
-                    return true;
-                }
-            }
-        }
-
-        // Check diagonally (top-left to bottom-right)
-        for (int i = 0; i < ROWS - 3; i++)
-        {
-            for (int j = 0; j < COLUMNS - 3; j++)
-            {
-                if (board[i, j] == currentPlayer && board[i + 1, j + 1] == currentPlayer &&
-                    board[i + 2, j + 2] == currentPlayer && board[i + 3, j + 3] == currentPlayer)
-                {
-                    return true;
-                }
-            }
-        }
-
-        // Check diagonally (top-right to bottom-left)
-        for (int i = 0; i < ROWS - 3; i++)
-        {
-            for (int j = 3; j < COLUMNS; j++)
-            {
-                if (board[i, j] == currentPlayer && board[i + 1, j - 1] == currentPlayer &&
-                    board[i + 2, j - 2] == currentPlayer && board[i + 3, j - 3] == currentPlayer)
-                {
-                    return true;
-                }
-            }
-        }
-
-        return false;
     }
 
+    // Check vertically
+    for (int i = 0; i < ROWS - 3; i++)
+    {
+        for (int j = 0; j < COLUMNS; j++)
+        {
+            if (board[i, j] != '#' && board[i, j] == board[i + 1, j] &&
+                board[i, j] == board[i + 2, j] && board[i, j] == board[i + 3, j])
+            {
+                return true;
+            }
+        }
+    }
+
+    // Check diagonally (top-left to bottom-right)
+    for (int i = 0; i < ROWS - 3; i++)
+    {
+        for (int j = 0; j < COLUMNS - 3; j++)
+        {
+            if (board[i, j] != '#' && board[i, j] == board[i + 1, j + 1] &&
+                board[i, j] == board[i + 2, j + 2] && board[i, j] == board[i + 3, j + 3])
+            {
+                return true;
+            }
+        }
+    }
+
+    // Check diagonally (top-right to bottom-left)
+    for (int i = 0; i < ROWS - 3; i++)
+    {
+        for (int j = 3; j < COLUMNS; j++)
+        {
+            if (board[i, j] != '#' && board[i, j] == board[i + 1, j - 1] &&
+                board[i, j] == board[i + 2, j - 2] && board[i, j] == board[i + 3, j - 3])
+            {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+//for checking draw condition
     public bool IsDraw()
     {
         for (int i = 0; i < ROWS; i++)
@@ -129,16 +140,23 @@ public bool DropPiece(int column)
         return true; //The Board is full
     }
 
-    public void SwitchPlayer()
+      public void SwitchPlayer()
     {
-        currentPlayer = currentPlayer == 1 ? 2 : 1;
+        currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
     }
 
-    public int GetCurrentPlayer()
+    public char GetCurrentPlayer()
     {
         return currentPlayer;
     }
+
+    public int GetColumnForAI()
+    {
+        // ai choose a random column
+        return random.Next(0, COLUMNS);
+    }
 }
+
 class Program
 {
     static void Main(string[] args)
